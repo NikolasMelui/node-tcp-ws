@@ -1,13 +1,14 @@
 {
-  "name": "nodejs-tcp-ws",
+  "name": "node-tcp-ws",
   "version": "0.0.1",
   "main": "./src/indes.js",
-  "repository": "git@github.com:NikolasMelui/nodejs-tcp-ws.git",
+  "repository": "git@github.com:NikolasMelui/node-tcp-ws.git",
   "author": "NikolasMelui <slak@samaradom.ru>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node",
+    "start:client": "nodemon src/client.js --exec babel-node",
+    "start:server": "nodemon src/server.js --exec babel-node",
     "build": "babel src -d build",
     "serve": "node build/index.js",
     "test": "jest"
