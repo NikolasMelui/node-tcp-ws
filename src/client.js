@@ -8,4 +8,9 @@ client.connect(
   '127.0.0.1',
   () => console.log('Connected')
 );
-client.write('Hi there!');
+
+setTimeout(() => client.write('Hi there!'), 2000);
+
+client.on('data', data => {
+  console.log(data.toString());
+});
