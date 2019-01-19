@@ -1,4 +1,3 @@
-// import http from 'http';
 import net from 'net';
 import Repl from 'repl';
 import {} from 'dotenv/config';
@@ -10,6 +9,9 @@ client.connect(
   () => console.log('Connected')
 );
 
+let iterator = 0;
+const curClientData = {};
+
 const repl = Repl.start({
   prompt: 'client> ',
   useColors: true,
@@ -18,8 +20,11 @@ const repl = Repl.start({
 });
 
 repl.on('line', newLine => {
+  iterator++;
   const line = newLine.trim();
-  if (line) {
-    client.write(line);
+  if (line && iterator > 1) {
+    client.write(`${curClientData.username}: ${line}`);
+  } else {
+    curClientData.username = line;
   }
 });
