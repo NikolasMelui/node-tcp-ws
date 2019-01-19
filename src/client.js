@@ -1,5 +1,6 @@
 // import http from 'http';
 import net from 'net';
+import Repl from 'repl';
 import {} from 'dotenv/config';
 
 const client = new net.Socket();
@@ -9,8 +10,16 @@ client.connect(
   () => console.log('Connected')
 );
 
-setTimeout(() => client.write('Hi there!'), 2000);
+const repl = Repl.start({
+  prompt: 'client> ',
+  useColors: true,
+  replMode: Repl.REPL_MODE_STRICT,
+  ignoreUndefined: true
+});
 
-client.on('data', data => {
-  console.log(data.toString());
+repl.on('line', newLine => {
+  const line = newLine.trim();
+  if (line) {
+    client.write(line);
+  }
 });
